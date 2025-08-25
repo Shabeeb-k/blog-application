@@ -34,15 +34,6 @@ exports.register = asyncHandler(async (req, res) => {
     });
 });
 
-// @desc Register new admin (requires secret)
-// @route POST /api/auth/register-admin
-// @access Public (but requires ADMIN_SECRET)
-
-
-
-// @desc Login user
-// @route POST /api/auth/login
-// @access Public
 exports.login = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
@@ -61,10 +52,8 @@ exports.login = asyncHandler(async (req, res) => {
 });
 
 
-// @desc Get current user
-// @route GET /api/auth/me
-// @access Private
+
 exports.currentUser = asyncHandler(async (req, res) => {
-    const user = req.user; // set by protect
+    const user = req.user; 
     res.json(user);
 });

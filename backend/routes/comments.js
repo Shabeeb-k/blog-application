@@ -4,7 +4,6 @@ const { createComment, getComments, deleteComment } = require('../controllers/co
 const { protect } = require('../middleware/auth');
 
 
-// Comments linked to posts
 router.get('/:postId', getComments);
 router.post('/:postId', protect, createComment);
 router.delete('/:id', protect, deleteComment);

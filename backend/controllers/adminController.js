@@ -1,9 +1,7 @@
 const User = require('../models/User');
 const Post = require('../models/Post');
 
-// @desc Get all users with their posts
-// @route GET /api/admin/users-with-posts
-// @access Admin
+
 exports.getUsersWithPosts = async (req, res) => {
   try {
     const users = await User.find().select('-password');

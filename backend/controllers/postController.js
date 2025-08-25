@@ -1,8 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const Post = require('../models/Post');
-// @desc    Create a new post
-// @route   POST /api/posts
-// @access  Private
+
 exports.createPost = asyncHandler(async (req, res) => {
     const { title, content } = req.body;
     const post = await Post.create({
@@ -14,9 +12,7 @@ exports.createPost = asyncHandler(async (req, res) => {
 });
 
 
-// @desc    Get all posts
-// @route   GET /api/posts
-// @access  Public
+
 exports.getPosts = asyncHandler(async (req, res) => {
     const posts = await Post.find().populate('author', 'name email');
     res.json(posts);
@@ -31,9 +27,6 @@ exports.getPost = asyncHandler(async (req, res) => {
 });
 
 
-// @desc Update post
-// @route PUT /api/posts/:id
-// @access Private (author or admin)
 exports.updatePost = asyncHandler(async (req, res) => {
     const post = await Post.findById(req.params.id);
     if (!post) {
@@ -52,9 +45,7 @@ exports.updatePost = asyncHandler(async (req, res) => {
 });
 
 
-// @desc Delete post
-// @route DELETE /api/posts/:id
-// @access Private (author or admin)
+
 exports.deletePost = asyncHandler(async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
@@ -78,9 +69,7 @@ exports.deletePost = asyncHandler(async (req, res) => {
     }
 });
 
-// @desc Get posts by current user
-// @route GET /api/posts/mine
-// @access Private
+
 exports.getMyPosts = asyncHandler(async (req, res) => {
     const posts = await Post.find({ author: req.user._id }).populate('author', 'name email');
     res.json(posts);

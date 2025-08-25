@@ -3,9 +3,6 @@ const Comment = require('../models/comment');
 const Post = require('../models/Post');
 
 
-// @desc Create comment
-// @route POST /api/comments/:postId
-// @access Private
 exports.createComment = asyncHandler(async (req, res) => {
 const { text } = req.body;
 if (!text) {
@@ -22,9 +19,7 @@ res.status(201).json(comment);
 });
 
 
-// @desc Get comments for a post
-// @route GET /api/comments/:postId
-// @access Public
+
 exports.getComments = asyncHandler(async (req, res) => {
 const comments = await Comment.find({ post: req.params.postId })
 .populate('author', 'name email')
@@ -33,9 +28,7 @@ res.json(comments);
 });
 
 
-// @desc Delete comment
-// @route DELETE /api/comments/:id
-// @access Private (author or admin)
+
 exports.deleteComment = asyncHandler(async (req, res) => {
 const comment = await Comment.findById(req.params.id);
 if (!comment) {
